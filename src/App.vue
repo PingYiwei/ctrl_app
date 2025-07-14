@@ -17,18 +17,23 @@ const viewOptions = [
   }
 ]
 
+function changeView(val) {
+  if (val === '2') {
+    // 获取所有历史记录
+    // TODO: 加上url
+    axios.get(`/web/queryRoundHistory`)
+        .then(res => {
+          // TODO: 把这里的代码取消注释
+          // historyControlList.value = res.data.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+  }
+}
+
 onMounted(() => {
   document.body.style.setProperty('--el-color-primary', '#5C0686');
-
-  // 获取所有历史记录
-  axios.get(`/web/queryRoundHistory`)
-    .then(res => {
-      // TODO: 把这里的代码取消注释
-      // historyControlList.value = res.data.data
-    })
-    .catch(err => {
-      console.log(err)
-    })
 })
 
 const controlParams ={
@@ -85,46 +90,46 @@ const controlParams ={
 
 const controlParamsList = [
     // 台数 0-8
-  {key: 'sgkNum', label: '双工况冷机台数', type: 'number', value: 3, min: 0, max: 4},
-  {key: 'sgkLqtNum', label: '双工况冷却塔台数', type: 'number', value: 2, min: 0, max: 4},
-  {key: 'sgkLqbNum', label: '双工况冷却泵台数', type: 'number', value: 2, min: 0, max: 4},
-  {key: 'yecbNum', label: '乙二醇泵台数', type: 'number', value: 1, min: 0, max: 4},
-  {key: 'ycLdbNum', label: '一次冷冻泵台数', type: 'number', value: 1, min: 0, max: 4},
-  {key: 'jzNum', label: '基载冷机台数', type: 'number', value: 0, min: 0, max: 4},
-  {key: 'jzLqtNum', label: '基载冷却塔台数', type: 'number', value: 0, min: 0, max: 4},
-  {key: 'jzLqbNum', label: '基载冷却泵台数', type: 'number', value: 0, min: 0, max: 4},
-  {key: 'jzLdbNum', label: '基载冷冻泵台数', type: 'number', value: 0, min: 0, max: 4},
+  {key: 'sgkNum', label: '双工况冷机台数', type: 'number', value: 3, min: 0, max: 4, editable: true},
+  {key: 'sgkLqtNum', label: '双工况冷却塔台数', type: 'number', value: 2, min: 0, max: 4, editable: true},
+  {key: 'sgkLqbNum', label: '双工况冷却泵台数', type: 'number', value: 2, min: 0, max: 4, editable: true},
+  {key: 'yecbNum', label: '乙二醇泵台数', type: 'number', value: 1, min: 0, max: 4, editable: true},
+  {key: 'ycLdbNum', label: '一次冷冻泵台数', type: 'number', value: 1, min: 0, max: 4, editable: true},
+  {key: 'jzNum', label: '基载冷机台数', type: 'number', value: 0, min: 0, max: 4, editable: true},
+  {key: 'jzLqtNum', label: '基载冷却塔台数', type: 'number', value: 0, min: 0, max: 4, editable: true},
+  {key: 'jzLqbNum', label: '基载冷却泵台数', type: 'number', value: 0, min: 0, max: 4, editable: true},
+  {key: 'jzLdbNum', label: '基载冷冻泵台数', type: 'number', value: 0, min: 0, max: 4, editable: true},
 
     // 冷站系统设定参数 9-24
-  {key: 'sgkOutTemp', label: '双工况冷机出水温度', type: 'number', value: 7},
-  {key: 'sgkLqtBjd', label: '双工况冷却塔逼近度', type: 'number', value: 1.5},
-  {key: 'sgkLqsDeltaTemp', label: '双工况冷却水供回水温差', type: 'number', value: 6},
-  {key: 'sgkLdbDeltaTemp', label: '双工况冷冻泵供回水温差', type: 'number', value: 5},
-  {key: 'sgkLdbDeltaPre', label: '双工况冷冻泵供回水压差', type: 'number', value: 0.5},
-  {key: 'yecbDeltaTemp', label: '乙二醇泵供回水温差', type: 'number', value: 3},
-  {key: 'bcOutTemp', label: '冰槽出水温度', type: 'number', value: 8},
-  {key: 'jzOutTemp', label: '基载冷机出水温度', type: 'number', value: 6.5},
-  {key: 'jzLqtBjd', label: '基载冷却塔逼近度', type: 'number', value: 1.2},
-  {key: 'jzLqsDeltaTemp', label: '基载冷却水供回水温差', type: 'number', value: 5.5},
-  {key: 'jzLdbDeltaTemp', label: '基载冷冻泵供回水温差', type: 'number', value: 4.5},
-  {key: 'jzLdbDeltaPre', label: '基载冷冻泵供回水压差', type: 'number', value: 0.4},
-  {key: 'lzOutTemp', label: '冷站供水温度', type: 'number', value: 9},
-  {key: 'lzDeltaPre', label: '冷站供回水压差', type: 'number', value: 0.6},
-  {key: 'lzDeltaTemp', label: '冷站供回水温差', type: 'number', value: 4},
+  {key: 'sgkOutTemp', label: '双工况冷机出水温度', type: 'number', value: 7, editable: true},
+  {key: 'sgkLqtBjd', label: '双工况冷却塔逼近度', type: 'number', value: 1.5, editable: true},
+  {key: 'sgkLqsDeltaTemp', label: '双工况冷却水供回水温差', type: 'number', value: 6, editable: true},
+  {key: 'sgkLdbDeltaTemp', label: '双工况冷冻泵供回水温差', type: 'number', value: 5, editable: true},
+  {key: 'sgkLdbDeltaPre', label: '双工况冷冻泵供回水压差', type: 'number', value: 0.5, editable: true},
+  {key: 'yecbDeltaTemp', label: '乙二醇泵供回水温差', type: 'number', value: 3, editable: true},
+  {key: 'bcOutTemp', label: '冰槽出水温度', type: 'number', value: 8, editable: false},
+  {key: 'jzOutTemp', label: '基载冷机出水温度', type: 'number', value: 6.5, editable: true},
+  {key: 'jzLqtBjd', label: '基载冷却塔逼近度', type: 'number', value: 1.2, editable: true},
+  {key: 'jzLqsDeltaTemp', label: '基载冷却水供回水温差', type: 'number', value: 5.5, editable: true},
+  {key: 'jzLdbDeltaTemp', label: '基载冷冻泵供回水温差', type: 'number', value: 4.5, editable: true},
+  {key: 'jzLdbDeltaPre', label: '基载冷冻泵供回水压差', type: 'number', value: 0.4, editable: true},
+  {key: 'lzOutTemp', label: '冷站供水温度', type: 'number', value: 9, editable: false},
+  {key: 'lzDeltaPre', label: '冷站供回水压差', type: 'number', value: 0.6, editable: false},
+  {key: 'lzDeltaTemp', label: '冷站供回水温差', type: 'number', value: 4, editable: false},
 
     // 换热站水泵及空调箱开启台数
-  {key: 'tygLdbNum', label: '体育馆冷冻水泵台数', type: 'number', value: 1},
-  {key: 'yygLdbNum', label: '游泳馆冷冻水泵台数', type: 'number', value: 1},
-  {key: 'eastSyLdbNum', label: '东侧商业冷冻水泵台数', type: 'number', value: 1},
-  {key: 'westSyLdbNum', label: '西侧商业冷冻水泵台数', type: 'number', value: 1},
-  {key: 'tygKtxNum', label: '体育馆空调箱台数', type: 'number', value: 2},
-  {key: 'dtKtxNum', label: '大厅空调箱台数', type: 'number', value: 2},
-  {key: 'tygLdbDeltaTemp', label: '体育馆冷冻水泵供回水温差', type: 'number', value: 3.5},
-  {key: 'yygLdbDeltaTemp', label: '游泳馆冷冻水泵供回水温差', type: 'number', value: 3.5},
-  {key: 'eastSyLdbDeltaTemp', label: '东侧商业冷冻水泵供回水温差', type: 'number', value: 3.5},
-  {key: 'westSyLdbDeltaTemp', label: '西侧商业冷冻水泵供回水温差', type: 'number', value: 3.5},
-  {key: 'tygKtTemp', label: '体育馆空调箱温度', type: 'number', value: 22},
-  {key: 'dtKtTemp', label: '大厅空调箱温度', type: 'number', value: 23},
+  {key: 'tygLdbNum', label: '体育馆冷冻水泵台数', type: 'number', value: 1, editable: true},
+  {key: 'yygLdbNum', label: '游泳馆冷冻水泵台数', type: 'number', value: 1, editable: true},
+  {key: 'eastSyLdbNum', label: '东侧商业冷冻水泵台数', type: 'number', value: 1, editable: true},
+  {key: 'westSyLdbNum', label: '西侧商业冷冻水泵台数', type: 'number', value: 1, editable: true},
+  {key: 'tygKtxNum', label: '体育馆空调箱台数', type: 'number', value: 2, editable: true},
+  {key: 'dtKtxNum', label: '大厅空调箱台数', type: 'number', value: 2, editable: true},
+  {key: 'tygLdbDeltaTemp', label: '体育馆冷冻水泵供回水温差', type: 'number', value: 3.5, editable: true},
+  {key: 'yygLdbDeltaTemp', label: '游泳馆冷冻水泵供回水温差', type: 'number', value: 3.5, editable: true},
+  {key: 'eastSyLdbDeltaTemp', label: '东侧商业冷冻水泵供回水温差', type: 'number', value: 3.5, editable: true},
+  {key: 'westSyLdbDeltaTemp', label: '西侧商业冷冻水泵供回水温差', type: 'number', value: 3.5, editable: true},
+  {key: 'tygKtTemp', label: '体育馆空调箱温度', type: 'number', value: 22, editable: false},
+  {key: 'dtKtTemp', label: '大厅空调箱温度', type: 'number', value: 23, editable: false},
 ]
 
 const params = ref({
@@ -163,13 +168,54 @@ const runModeOptions = [
   }
 ]
 
-function submitScheme() {
+async function submitScheme() {
   const now = new Date()
-  params.value.date = now.toLocaleString().slice(0, 10)
+  const yyyy = now.getFullYear()
+  const mm = String(now.getMonth() + 1).padStart(2, '0')
+  const dd = String(now.getDate()).padStart(2, '0')
+  // 时间
+  params.value.date = `${yyyy}-${mm}-${dd}`
   params.value.hour = `${now.getHours().toString().padStart(2, '0')}:00`
 
-  const uuid = uuidv4()
+  // 初始化uuid
+  let uuid = uuidv4()
   params.value.roundId = uuid
+
+  // 判断是否执行任何以及存在任务后采用同样uuid的逻辑
+  try {
+    // TODO: 添加url
+    const res = await axios.get(`/web/queryRoundInfoByDate`, {
+      params: {
+        date: params.value.date,
+        hour: params.value.hour
+      }
+    })
+
+    const data = res.data.data
+
+    if (data.executionStatus === null && data.endTime === null) {
+      ElMessage({
+        message: '当前正在执行任务，请稍后提交',
+        type: 'warning'
+      })
+      return null
+    } else if (data.executionStatus === 1) {
+      ElMessage({
+        message: '本小时指令已经成功，请下一小时再执行',
+        type: 'warning'
+      })
+      return null
+    }
+
+    if (data.roundId !== '' && data.roundId !== null) {
+      uuid = data.roundId
+    }
+
+  } catch (error) {
+    console.error('请求失败:', error)
+    return null
+  }
+
   params.value.deviceMode = Number(runMode.value)
 
   const scheme = {
@@ -210,7 +256,7 @@ const historyControlList = ref([
   }
 ])
 
-const isShowHistoryDetail = ref(true)
+const isShowHistoryDetail = ref(false)
 
 function closeHistoryDialog() {
   isShowHistoryDetail.value = false
@@ -218,69 +264,31 @@ function closeHistoryDialog() {
 
 const activeRound = ref('1')
 const roundDetail = ref([
-  {
-    "date": "2025-05-19",
-    "hour": "14:00",
-    "roundId": "ca0d3b17-0db8-4f11-9121-25607f09620c",
-    "rounds": 1,
-    "isRepeat": 0,
-    "roundStatus": 1,
-    "roundStartTime": "2025-06-23 00:57:16",
-    "roundEndTime": "2025-06-23 00:10:11",
-    "deviceList": [
-      {
-        "deviceId": 4099,
-        "deviceName": "冷却塔01#-02#\nLQT1",
-        "paramId": 7552,
-        "paramName": "出水温度",
-        "beforeParamValue": "27.50",
-        "executeParamValue": "23.03",
-        "executeParamName": null,
-        "executeStartTime": "2025-06-23 00:18:04",
-        "executeEndTime": "2025-06-23 00:18:04",
-        "executeStatus": 3,
-        "postCheckPassed": 2
-      }
-    ]
-  },
-  {
-    "date": "2025-05-19",
-    "hour": "14:00",
-    "roundId": "ca0d3b17-0db8-4f11-9121-25607f09620c",
-    "rounds": 2,
-    "isRepeat": 0,
-    "roundStatus": 1,
-    "roundStartTime": "2025-06-23 00:57:16",
-    "roundEndTime": "2025-06-23 00:10:11",
-    "deviceList": [
-      {
-        "deviceId": 4099,
-        "deviceName": "冷却塔01#-02#\nLQT1",
-        "paramId": 7552,
-        "paramName": "出水温度",
-        "beforeParamValue": "27.50",
-        "executeParamValue": "23.03",
-        "executeParamName": null,
-        "executeStartTime": "2025-06-23 00:18:04",
-        "executeEndTime": "2025-06-23 00:18:04",
-        "executeStatus": 3,
-        "postCheckPassed": 2
-      },
-      {
-        "deviceId": 4099,
-        "deviceName": "冷却塔03#-04#\nLQT1",
-        "paramId": 7552,
-        "paramName": "出水温度",
-        "beforeParamValue": "27.50",
-        "executeParamValue": "23.03",
-        "executeParamName": null,
-        "executeStartTime": "2025-06-23 00:18:04",
-        "executeEndTime": "2025-06-23 00:18:04",
-        "executeStatus": 3,
-        "postCheckPassed": 2
-      }
-    ]
-  }
+  // {
+  //   "date": "2025-05-19",
+  //   "hour": "14:00",
+  //   "roundId": "ca0d3b17-0db8-4f11-9121-25607f09620c",
+  //   "rounds": 1,
+  //   "isRepeat": 0,
+  //   "roundStatus": 1,
+  //   "roundStartTime": "2025-06-23 00:57:16",
+  //   "roundEndTime": "2025-06-23 00:10:11",
+  //   "deviceList": [
+  //     {
+  //       "deviceId": 4099,
+  //       "deviceName": "冷却塔01#-02#\nLQT1",
+  //       "paramId": 7552,
+  //       "paramName": "出水温度",
+  //       "beforeParamValue": "27.50",
+  //       "executeParamValue": "23.03",
+  //       "executeParamName": null,
+  //       "executeStartTime": "2025-06-23 00:18:04",
+  //       "executeEndTime": "2025-06-23 00:18:04",
+  //       "executeStatus": 3,
+  //       "postCheckPassed": 2
+  //     }
+  //   ]
+  // },
 ])
 
 async function checkHistoryDetail(id) {
@@ -299,6 +307,7 @@ async function checkHistoryDetail(id) {
   //   )
   //
   //   roundDetail.value = await Promise.all(requestList)
+  //   isShowHistoryDetail.value = true
   // } catch (error) {
   //   console.error('请求失败：', error)
   // }
@@ -316,7 +325,7 @@ const statusMap = {
     <div class="top-container flex flex-row justify-between p-[20px] text-[24px] text-primary font-bold border-b-[1px] border-solid border-[#E5E5E5]">
       <div>杭州奥体中心智能BA控制系统</div>
       <div class="custom-segmented">
-        <el-segmented style="width: 300px" v-model="viewType" :options="viewOptions" />
+        <el-segmented style="width: 300px" v-model="viewType" :options="viewOptions" @change="changeView"/>
       </div>
     </div>
 
@@ -333,23 +342,23 @@ const statusMap = {
           <div class="text-primary font-bold text-[20px]">冷站设备开启台数设定</div>
           <div v-for="item in controlParamsList.slice(0, 9)" :key="item.key" class="param-item grid grid-cols-2 gap-[10px] items-center">
             <label>{{ item.label }}</label>
-            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" />
+            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" :disabled="!item.editable" />
           </div>
         </div>
 
         <div class="flex flex-col gap-[10px] pr-[10px]">
           <div class="text-primary font-bold text-[20px]">冷站运行参数设定</div>
-          <div v-for="item in controlParamsList.slice(10, 24)" :key="item.key" class="param-item grid grid-cols-2 gap-[10px] items-center">
+          <div v-for="item in controlParamsList.slice(9, 24)" :key="item.key" class="param-item grid grid-cols-2 gap-[10px] items-center">
             <label>{{ item.label }}</label>
-            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" />
+            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" :disabled="!item.editable"/>
           </div>
         </div>
 
         <div class="flex flex-col gap-[10px] pr-[10px]">
           <div class="text-primary font-bold text-[20px]">冷站运行参数设定</div>
-          <div v-for="item in controlParamsList.slice(25, 36)" :key="item.key" class="param-item grid grid-cols-2 gap-[10px] items-center">
+          <div v-for="item in controlParamsList.slice(24, 36)" :key="item.key" class="param-item grid grid-cols-2 gap-[10px] items-center">
             <label>{{ item.label }}</label>
-            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" />
+            <input v-model="params[item.key]" type="number" :min="item.min" :max="item.max" :disabled="!item.editable" />
           </div>
         </div>
       </div>
@@ -465,6 +474,13 @@ input:focus {
 
 input::placeholder {
   color: var(--text-secondary-color);
+}
+
+input:disabled {
+  background-color: #f0f0f0; /* 灰色背景 */
+  color: #999999;            /* 字体变淡 */
+  border-color: #dcdcdc;     /* 可选：边框也变淡 */
+  cursor: not-allowed;       /* 鼠标变成禁用状态 */
 }
 
 .primary-button {
