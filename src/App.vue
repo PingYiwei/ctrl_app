@@ -323,7 +323,10 @@ const statusMap = {
 <template>
   <div class="flex flex-col w-full h-full">
     <div class="top-container flex flex-row justify-between p-[20px] text-[24px] text-primary font-bold border-b-[1px] border-solid border-[#E5E5E5]">
-      <div>杭州奥体中心智能BA控制系统</div>
+      <div class="flex flex-row gap-[20px] items-center">
+        <img src="/Logo.svg" alt="logo" class="w-[30px] h-[30px]"/>
+        <div>杭州奥体中心智能BA控制系统</div>
+      </div>
       <div class="custom-segmented">
         <el-segmented style="width: 300px" v-model="viewType" :options="viewOptions" @change="changeView"/>
       </div>
